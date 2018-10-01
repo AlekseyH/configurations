@@ -1,0 +1,399 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Search flight application",
+    "license": {
+      "name": "ahaytman.com"
+    }
+  },
+  "host": "ahaytman.com",
+  "basePath": "/searchapp",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/getAllFlights": {
+      "get": {
+        "tags": [
+          "Flights"
+        ],
+        "summary": "Get all Flight currently in the system",
+        "operationId": "getAllFlights",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of flights in the system",
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "description": "Define the expiration time"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Flights"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/getFlights/country/{countryName}": {
+      "get": {
+        "tags": [
+          "Flights"
+        ],
+        "summary": "Return all flights in the system related to country",
+        "description": "",
+        "operationId": "getFlightsByCountry",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "countryName",
+            "in": "path",
+            "type": "string",
+            "description": "Countries from the list",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Flights"
+            },
+            "headers": {
+              "Cache-Control": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/getFlights/country/{countryName}/city/{cityName}": {
+      "get": {
+        "tags": [
+          "Flights"
+        ],
+        "summary": "Fetch flight with country name and city name",
+        "description": "",
+        "operationId": "getFlightsByCountryAndCity",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "countryName",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "cityName",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Flights"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/getFlightsByDate/country/{countryName}/city/{cityName}": {
+      "get": {
+        "tags": [
+          "Flights"
+        ],
+        "summary": "Fetch flights by date, country and city",
+        "description": "",
+        "operationId": "getFlightsByDate",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "countryName",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "cityName",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "dateStart",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "Start Date that need to be considered for filter"
+          },
+          {
+            "name": "dateEnd",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "End Date that need to be considered for filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Flights"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/getFlightsByDateAndPrice/country/{countryName}/city/{cityName}": {
+      "get": {
+        "tags": [
+          "Flights"
+        ],
+        "summary": "Find flight by date and price",
+        "operationId": "getFlightsByDateAndPrice",
+        "description": "",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "countryName",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "cityName",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "priceMin",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "Minimum price that customer can pay"
+          },
+          {
+            "name": "priceMax",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "Maximum price that customer can pay"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Flights"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/getFlightsByPriceRange": {
+      "get": {
+        "tags": [
+          "Flights"
+        ],
+        "summary": "Find flights by price range",
+        "operationId": "getFlightsByPriceRange",
+        "description": "",
+        "parameters": [
+          {
+            "name": "priceMin",
+            "in": "query",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "priceMax",
+            "in": "query",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Flights"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Flights"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Flight": {
+      "required": [
+        "code",
+        "company",
+        "departure",
+        "departureTime",
+        "arrival",
+        "arrivalTime",
+        "flightPrice"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "maxLength": 9,
+          "minLength": 6
+        },
+        "company": {
+          "type": "string"
+        },
+        "departure": {
+          "type": "string"
+        },
+        "departureTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of departure"
+        },
+        "arrival": {
+          "type": "string"
+        },
+        "arrivalTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of arrival"
+        },
+        "flightPrice": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "xml": {
+        "name": "Flight",
+        "wrapped": true
+      }
+    },
+    "Flights": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Flight"
+      },
+      "xml": {
+        "name": "Flights"
+      }
+    },
+    "Error": {
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
