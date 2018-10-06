@@ -24,6 +24,14 @@
           "application/json",
           "application/xml"
         ],
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "type": "string",
+            "default": "application/json"
+          }
+        ],
         "responses": {
           "200": {
             "description": "List of flights in the system",
@@ -31,6 +39,10 @@
               "Cache-Control": {
                 "type": "string",
                 "description": "Define the expiration time"
+              },
+              "Accept": {
+                "type": "string",
+                "default": "application/json"
               }
             },
             "schema": {
