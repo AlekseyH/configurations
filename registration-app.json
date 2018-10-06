@@ -29,6 +29,7 @@
             "name": "Content-Type",
             "in": "header",
             "type": "string",
+            "required": true,
             "default": "application/json"
           }
         ],
@@ -378,8 +379,8 @@
           "description": "Time of arrival"
         },
         "flightPrice": {
-          "type": "integer",
-          "format": "int64"
+          "type": "string",
+          "maxLength": 5
         }
       },
       "xml": {
