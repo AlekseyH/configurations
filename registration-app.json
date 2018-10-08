@@ -84,6 +84,13 @@
             "type": "string",
             "description": "Countries from the list",
             "required": true
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "default": "application/json"
           }
         ],
         "responses": {
@@ -137,6 +144,13 @@
             "in": "path",
             "type": "string",
             "required": true
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "default": "application/json"
           }
         ],
         "responses": {
@@ -199,6 +213,13 @@
             "type": "string",
             "required": true,
             "description": "End Date that need to be considered for filter"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "default": "application/json"
           }
         ],
         "responses": {
@@ -273,6 +294,13 @@
             "type": "string",
             "required": true,
             "description": "Maximum price that customer can pay"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "default": "application/json"
           }
         ],
         "responses": {
@@ -317,6 +345,13 @@
             "in": "query",
             "type": "string",
             "required": true
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "default": "application/json"
           }
         ],
         "responses": {
