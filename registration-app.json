@@ -270,13 +270,13 @@
             "required": true
           },
           {
-            "name": "startDate",
+            "name": "dateStart",
             "in": "query",
             "type": "string",
             "required": true
           },
           {
-            "name": "endDate",
+            "name": "dateEnd",
             "in": "query",
             "type": "string",
             "required": true
@@ -285,7 +285,8 @@
             "name": "priceMin",
             "in": "query",
             "type": "string",
-            "required": true,
+            "default": "0",
+            "required": false,
             "description": "Minimum price that customer can pay"
           },
           {
@@ -338,7 +339,8 @@
             "name": "priceMin",
             "in": "query",
             "type": "string",
-            "required": true
+            "required": false,
+            "default": 0
           },
           {
             "name": "priceMax",
@@ -383,8 +385,10 @@
         "code",
         "company",
         "departure",
+        "departureCountry",
         "departureTime",
         "arrival",
+        "arrivalCountry",
         "arrivalTime",
         "flightPrice"
       ],
@@ -400,10 +404,16 @@
         "departure": {
           "type": "string"
         },
+        "departuryCountry": {
+          "type": "string"
+        },
         "departureTime": {
           "type": "string",
           "format": "date-time",
           "description": "Time of departure"
+        },
+        "arrivalCountry": {
+          "type": "string"
         },
         "arrival": {
           "type": "string"

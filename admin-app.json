@@ -1,0 +1,362 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Admin application",
+    "license": {
+      "name": "ahaytman.com"
+    }
+  },
+  "host": "ahaytman.com",
+  "basePath": "/adminapp",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/createFlight": {
+      "post": {
+        "tags": [
+          "Create flight"
+        ],
+        "summary": "Create flight in the system",
+        "operationId": "createFlight",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "flight",
+            "description": "Flight object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Flight"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "required": true,
+            "type": "string",
+            "default": "application/json"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Cache-Control": {
+                "type": "string",
+                "description": "Define the expiration time"
+              },
+              "Accept": {
+                "type": "string",
+                "default": "application/json"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/updateFlight": {
+      "put": {
+        "tags": [
+          "Updated flight"
+        ],
+        "summary": "Updating flight instance",
+        "description": "",
+        "operationId": "updateFlight",
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "flight",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Flight"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Content-Type",
+            "type": "string",
+            "required": true,
+            "default": "application/json"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully updated",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "500": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/removeFlight/code/{code}": {
+      "delete": {
+        "tags": [
+          "Remove flight"
+        ],
+        "summary": "Remove operation from active flight table and saving in history table",
+        "description": "",
+        "operationId": "removeFlight",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "default": "application/json"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/disable/code/{code}": {
+      "put": {
+        "tags": [
+          "Disactivation of flight"
+        ],
+        "summary": "Disactivate flight for searching capability",
+        "description": "",
+        "operationId": "disableForSearch",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "default": "application/json"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/enable/code/{code}": {
+      "put": {
+        "tags": [
+          "Activation of flight"
+        ],
+        "summary": "Activation of flight by code",
+        "operationId": "activateFlight",
+        "description": "",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "default": "application/json"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Flight": {
+      "required": [
+        "code",
+        "company",
+        "departure",
+        "departureCountry",
+        "departureTime",
+        "arrival",
+        "arrivalCountry",
+        "arrivalTime",
+        "flightPrice"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "maxLength": 9,
+          "minLength": 6
+        },
+        "company": {
+          "type": "string"
+        },
+        "departure": {
+          "type": "string"
+        },
+        "departuryCountry": {
+          "type": "string"
+        },
+        "departureTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of departure"
+        },
+        "arrivalCountry": {
+          "type": "string"
+        },
+        "arrival": {
+          "type": "string"
+        },
+        "arrivalTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of arrival"
+        },
+        "flightPrice": {
+          "type": "string",
+          "maxLength": 5
+        }
+      },
+      "xml": {
+        "name": "Flight",
+        "wrapped": true
+      }
+    },
+    "Message": {
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
